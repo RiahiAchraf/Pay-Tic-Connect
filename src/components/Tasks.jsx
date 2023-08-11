@@ -17,6 +17,8 @@ const Tasks = () => {
   const [textValue, setTextValue] = useState('');
   const [checked, setChecked] = useState('');
 
+  console.log(checked);
+
   const items = [
     {
       id: 1,
@@ -24,7 +26,6 @@ const Tasks = () => {
       title: 'Feature 1',
       selectValue,
       textValue,
-      checkbox: !!checked ? 'Confirmed' : 'Not Confirmed',
       setSelectValue,
       setTextValue,
       setChecked,
@@ -39,7 +40,12 @@ const Tasks = () => {
   useEffect(() => {
     // Update the value property within each item of taskList
     setTasksList((prevTaskList) =>
-      prevTaskList.map((item) => ({ ...item, selectValue, textValue, checked })),
+      prevTaskList.map((item) => ({
+        ...item,
+        selectValue,
+        textValue,
+        checked: !!checked ? 'Confirmed' : 'Not Confirmed',
+      })),
     );
   }, [selectValue, textValue, checked]);
 

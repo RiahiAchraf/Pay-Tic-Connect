@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/TableContent.jsx"
+    "src/components/TableContent.jsx",
+    "src/components/Tasks.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -4,23 +4,18 @@ import { useDrag } from 'react-dnd';
 import itemsTypes from '../utils/itemsTypes';
 
 interface TaskCardProps {
-  component: React.ReactNode;
   status: string;
   title: string;
-  content: string;
-  icon: string;
-  id: string;
+  id: number;
   setSelectValue: (value: string) => void;
   setChecked: (value: boolean) => void;
   setTextValue: (value: string) => void;
   idx: number;
-  inputType: string;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({
   status,
   title,
-  content,
   id,
   setSelectValue,
   setTextValue,
@@ -62,7 +57,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
     >
       <span className='font-bold'>{status}</span>
       <h1>{title}</h1>
-      <p className='flex items-center'>{content}</p>
 
       <div>
         <label className='mb-2 block text-sm font-medium leading-6 text-gray-900'>Title</label>
@@ -85,9 +79,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <option value='' disabled>
             Select an option
           </option>
-          <option value='option1'>option 1</option>
-          <option value='option2'>option 2</option>
-          <option value='option3'>option 3</option>
+          <option value='user1'>User 1</option>
+          <option value='user2'>User 2</option>
+          <option value='user3'>User 3</option>
         </select>
       </div>
 
