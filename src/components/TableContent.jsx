@@ -8,15 +8,25 @@ const TableContent = ({ doneTask }) => {
 
   // The useMemo hook is used for memoization in React. It allows you to memoize the result of a computation and only recompute it when its dependencies change. By using useMemo, you can optimize the performance of your application by avoiding unnecessary computations.
 
+  console.log(doneTask);
+
   const columns = useMemo(
     () => [
       {
-        Header: 'Unique Identifier',
+        Header: 'ID',
         accessor: 'id',
       },
       {
+        Header: 'Title',
+        accessor: 'title',
+      },
+      {
         Header: 'Values',
-        accessor: 'content',
+        accessor: 'value',
+      },
+      {
+        Header: 'Confirm',
+        accessor: 'checkbox',
       },
     ],
     [],

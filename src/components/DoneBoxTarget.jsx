@@ -8,21 +8,14 @@ import { CardContext } from './Tasks';
 const DoneBoxTarget = ({ children }) => {
   const { isDone } = useContext(CardContext);
 
-  const [{ isOver }, drop] = useDrop({
+  const [{}, drop] = useDrop({
     accept: itemsTypes.CARD,
 
     drop: (item) => isDone(item.ID),
   });
 
   return (
-    <Box
-      ref={drop}
-      minH='600px'
-      w='100%'
-      p={4}
-      rounded='md'
-      bg={isOver ? 'green.300' : 'transparent'}
-    >
+    <Box ref={drop} minH='600px' w='100%' p={4} rounded='md'>
       {children}
     </Box>
   );

@@ -1,8 +1,6 @@
 'use client';
 
-import React, { createContext, useState } from 'react';
-
-import { data } from '@/utils/data';
+import React, { createContext, useEffect, useState } from 'react';
 
 import DoneBoxTarget from './DoneBoxTarget';
 import InProgressBoxTarget from './InProgressBoxTarget';
@@ -15,8 +13,45 @@ export const CardContext = createContext({
 });
 
 const Tasks = () => {
-  const [taskList, setTasksList] = useState(data);
+  const [value, setValue] = useState('');
+  const [checked, setChecked] = useState('');
+
+  const items = [
+    {
+      id: 1,
+      status: 'InProgress',
+      title: 'Feature 1',
+      inputType: 'text',
+      value: '-',
+      checkbox: '-',
+    },
+    {
+      id: 2,
+      status: 'InProgress',
+      title: 'Feature 2',
+      inputType: 'select',
+      value: value,
+      checkbox: '-',
+      setValue: setValue,
+    },
+    {
+      id: 3,
+      status: 'InProgress',
+      title: 'Feature 3',
+      value: '-',
+      inputType: 'checkbox',
+      checkbox: !checked ? 'Confirmed' : 'Not Confirmed',
+      setChecked: setChecked,
+    },
+  ];
+
   const [doneTask, setDoneTask] = useState([]);
+  const [taskList, setTasksList] = useState(items.map((item) => ({ ...item, value, checked })));
+
+  useEffect(() => {
+    // Update the value property within each item of taskList
+    setTasksList((prevTaskList) => prevTaskList.map((item) => ({ ...item, value, checked })));
+  }, [value, checked]);
 
   const isDone = (id) => {
     const draggedTask = taskList.filter((task) => task.id === id)[0];
@@ -24,7 +59,6 @@ const Tasks = () => {
 
     setTasksList((prevState) => {
       const newItems = prevState.filter((task) => task.id !== id).concat(draggedTask);
-
       return newItems;
     });
 
@@ -53,16 +87,6 @@ const Tasks = () => {
       <div className='flex flex-col gap-8'>
         <div className='flex w-full flex-col gap-8 md:flex-row'>
           <div className='w-full rounded-xl border p-2 shadow-sm'>
-            {/* {statuses.map(({ status }, idx) => (
-              <Text
-                key={idx}
-                fontWeight="semibold"
-                fontSize="2xl"
-                textAlign="center"
-              >
-                {status}
-              </Text>
-            ))} */}
             <h1 className='flex justify-center border-b border-gray-100 py-2 font-semibold capitalize text-gray-700'>
               In progress
             </h1>
@@ -72,14 +96,16 @@ const Tasks = () => {
               <div className='flex flex-col gap-4 p-4'>
                 {taskList
                   .filter((task) => task.status === 'InProgress')
-                  .map(({ icon, title, status, content, id }, idx) => (
+                  .map(({ title, status, id, setValue, setChecked, inputType }, idx) => (
                     <TaskCard
                       id={id}
                       key={idx}
-                      icon={icon}
                       title={title}
                       status={status}
-                      content={content}
+                      setValue={setValue}
+                      setChecked={setChecked}
+                      inputType={inputType}
+                      idx={idx}
                     />
                   ))}
               </div>
@@ -96,14 +122,16 @@ const Tasks = () => {
               <div className='flex flex-col gap-4 p-4'>
                 {taskList
                   .filter((task) => task.status === 'DONE')
-                  .map(({ icon, title, status, content, id }, idx) => (
+                  .map(({ title, status, id, setValue, setChecked, inputType }, idx) => (
                     <TaskCard
                       id={id}
                       key={idx}
-                      icon={icon}
                       title={title}
                       status={status}
-                      content={content}
+                      setValue={setValue}
+                      setChecked={setChecked}
+                      inputType={inputType}
+                      idx={idx}
                     />
                   ))}
               </div>
@@ -112,6 +140,7 @@ const Tasks = () => {
         </div>
 
         <button
+          type='submit'
           className='rounded-md bg-gray-900 py-4 capitalize text-white shadow-md hover:bg-gray-700'
           onClick={handleAddTask}
         >

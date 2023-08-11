@@ -8,7 +8,7 @@ import { CardContext } from './Tasks';
 const InProgressBoxTarget = ({ children }) => {
   const { isInProgress } = useContext(CardContext);
 
-  const [{ isOver }, drop] = useDrop({
+  const [{}, drop] = useDrop({
     accept: itemsTypes.CARD,
 
     // drop: (item, monitor) => isDone(item.ID),
@@ -21,14 +21,7 @@ const InProgressBoxTarget = ({ children }) => {
   });
 
   return (
-    <Box
-      ref={drop}
-      minH='600px'
-      w='100%'
-      p={4}
-      rounded='md'
-      bg={isOver ? 'green.300' : 'transparent'}
-    >
+    <Box ref={drop} minH='600px' w='100%' p={4} rounded='md'>
       {children}
     </Box>
   );
