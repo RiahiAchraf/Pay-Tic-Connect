@@ -16,15 +16,11 @@ const TableContent = ({ doneTask }) => {
       },
       {
         Header: 'Title',
-        accessor: 'textValue',
+        accessor: 'title',
       },
       {
         Header: 'Assigned',
-        accessor: 'selectValue',
-      },
-      {
-        Header: 'Confirm',
-        accessor: 'checked',
+        accessor: 'value',
       },
     ],
     [],

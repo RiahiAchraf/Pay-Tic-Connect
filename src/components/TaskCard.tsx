@@ -4,23 +4,17 @@ import { useDrag } from 'react-dnd';
 import itemsTypes from '../utils/itemsTypes';
 
 interface TaskCardProps {
+  content: React.ReactNode;
   status: string;
   title: string;
   id: number;
   setSelectValue: (value: string) => void;
   setChecked: (value: boolean) => void;
-  setTextValue: (value: string) => void;
+  item: React.Dispatch<React.SetStateAction<string>>;
   idx: number;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({
-  status,
-  title,
-  id,
-  setSelectValue,
-  setTextValue,
-  setChecked,
-}) => {
+const TaskCard: React.FC<TaskCardProps> = ({ status, title, id, content, item }) => {
   const [{}, drag] = useDrag({
     type: itemsTypes.CARD,
     item: { type: itemsTypes.CARD, ID: id },
@@ -33,21 +27,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   const handleSelectChange = (event: any) => {
     setSelectedValue(event.target.value);
-    setSelectValue(event.target.value);
-  };
-
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (event: any) => {
-    setInputValue(event.target.value);
-    setTextValue(event.target.value);
-  };
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-    setChecked(!isChecked);
+    item(event.target.value);
   };
 
   return (
@@ -57,18 +37,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
     >
       <span className='font-bold'>{status}</span>
       <h1>{title}</h1>
-
-      <div>
-        <label className='mb-2 block text-sm font-medium leading-6 text-gray-900'>Title</label>
-        <input
-          className='w-full rounded-lg border border-zinc-400 px-5 py-[0.781rem] shadow-sm placeholder:text-zinc-400 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-gray-100'
-          type='text'
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder='Type...'
-        />
-      </div>
-
+      {content}
       <div>
         <label className='block text-sm font-medium leading-6 text-gray-900'>Assigned</label>
         <select
@@ -83,11 +52,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <option value='user2'>User 2</option>
           <option value='user3'>User 3</option>
         </select>
-      </div>
-
-      <div className='flex items-center gap-2'>
-        <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange} />
-        <label className='block text-sm font-medium leading-6 text-gray-900'>Check!</label>
       </div>
     </div>
   );
