@@ -10,8 +10,9 @@ interface TaskCardProps {
   content: string;
   icon: string;
   id: string;
-  setValue: (value: string) => void;
+  setSelectValue: (value: string) => void;
   setChecked: (value: boolean) => void;
+  setTextValue: (value: string) => void;
   idx: number;
   inputType: string;
 }
@@ -21,9 +22,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
   title,
   content,
   id,
-  setValue,
+  setSelectValue,
+  setTextValue,
   setChecked,
-  inputType,
 }) => {
   const [{}, drag] = useDrag({
     type: itemsTypes.CARD,
@@ -37,13 +38,14 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   const handleSelectChange = (event: any) => {
     setSelectedValue(event.target.value);
-    setValue(event.target.value);
+    setSelectValue(event.target.value);
   };
 
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event: any) => {
     setInputValue(event.target.value);
+    setTextValue(event.target.value);
   };
 
   const [isChecked, setIsChecked] = useState(false);
@@ -61,39 +63,38 @@ const TaskCard: React.FC<TaskCardProps> = ({
       <span className='font-bold'>{status}</span>
       <h1>{title}</h1>
       <p className='flex items-center'>{content}</p>
-      {inputType === 'text' ? (
-        <div>
-          <label className='mb-2 block text-sm font-medium leading-6 text-gray-900'>Title</label>
-          <input
-            className='w-full rounded-lg border border-zinc-400 px-5 py-[0.781rem] shadow-sm placeholder:text-zinc-400 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-gray-100'
-            type='text'
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder='Type...'
-          />
-        </div>
-      ) : inputType === 'select' ? (
-        <div>
-          <label className='block text-sm font-medium leading-6 text-gray-900'>Assigned</label>
-          <select
-            className='mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6'
-            value={selectedValue}
-            onChange={handleSelectChange}
-          >
-            <option value='' disabled>
-              Select an option
-            </option>
-            <option value='option1'>option 1</option>
-            <option value='option2'>option 2</option>
-            <option value='option3'>option 3</option>
-          </select>
-        </div>
-      ) : (
-        <div className='flex items-center gap-2'>
-          <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange} />
-          <label className='block text-sm font-medium leading-6 text-gray-900'>Check!</label>
-        </div>
-      )}
+
+      <div>
+        <label className='mb-2 block text-sm font-medium leading-6 text-gray-900'>Title</label>
+        <input
+          className='w-full rounded-lg border border-zinc-400 px-5 py-[0.781rem] shadow-sm placeholder:text-zinc-400 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-gray-100'
+          type='text'
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder='Type...'
+        />
+      </div>
+
+      <div>
+        <label className='block text-sm font-medium leading-6 text-gray-900'>Assigned</label>
+        <select
+          className='mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6'
+          value={selectedValue}
+          onChange={handleSelectChange}
+        >
+          <option value='' disabled>
+            Select an option
+          </option>
+          <option value='option1'>option 1</option>
+          <option value='option2'>option 2</option>
+          <option value='option3'>option 3</option>
+        </select>
+      </div>
+
+      <div className='flex items-center gap-2'>
+        <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange} />
+        <label className='block text-sm font-medium leading-6 text-gray-900'>Check!</label>
+      </div>
     </div>
   );
 };

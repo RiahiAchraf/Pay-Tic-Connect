@@ -13,7 +13,8 @@ export const CardContext = createContext({
 });
 
 const Tasks = () => {
-  const [value, setValue] = useState('');
+  const [selectValue, setSelectValue] = useState('');
+  const [textValue, setTextValue] = useState('');
   const [checked, setChecked] = useState('');
 
   const items = [
@@ -21,37 +22,26 @@ const Tasks = () => {
       id: 1,
       status: 'InProgress',
       title: 'Feature 1',
-      inputType: 'text',
-      value: '-',
-      checkbox: '-',
-    },
-    {
-      id: 2,
-      status: 'InProgress',
-      title: 'Feature 2',
-      inputType: 'select',
-      value: value,
-      checkbox: '-',
-      setValue: setValue,
-    },
-    {
-      id: 3,
-      status: 'InProgress',
-      title: 'Feature 3',
-      value: '-',
-      inputType: 'checkbox',
-      checkbox: !checked ? 'Confirmed' : 'Not Confirmed',
-      setChecked: setChecked,
+      selectValue,
+      textValue,
+      checkbox: !!checked ? 'Confirmed' : 'Not Confirmed',
+      setSelectValue,
+      setTextValue,
+      setChecked,
     },
   ];
 
   const [doneTask, setDoneTask] = useState([]);
-  const [taskList, setTasksList] = useState(items.map((item) => ({ ...item, value, checked })));
+  const [taskList, setTasksList] = useState(
+    items.map((item) => ({ ...item, selectValue, textValue, checked })),
+  );
 
   useEffect(() => {
     // Update the value property within each item of taskList
-    setTasksList((prevTaskList) => prevTaskList.map((item) => ({ ...item, value, checked })));
-  }, [value, checked]);
+    setTasksList((prevTaskList) =>
+      prevTaskList.map((item) => ({ ...item, selectValue, textValue, checked })),
+    );
+  }, [selectValue, textValue, checked]);
 
   const isDone = (id) => {
     const draggedTask = taskList.filter((task) => task.id === id)[0];
@@ -96,18 +86,24 @@ const Tasks = () => {
               <div className='flex flex-col gap-4 p-4'>
                 {taskList
                   .filter((task) => task.status === 'InProgress')
-                  .map(({ title, status, id, setValue, setChecked, inputType }, idx) => (
-                    <TaskCard
-                      id={id}
-                      key={idx}
-                      title={title}
-                      status={status}
-                      setValue={setValue}
-                      setChecked={setChecked}
-                      inputType={inputType}
-                      idx={idx}
-                    />
-                  ))}
+                  .map(
+                    (
+                      { title, status, id, setSelectValue, setTextValue, setChecked, inputType },
+                      idx,
+                    ) => (
+                      <TaskCard
+                        id={id}
+                        key={idx}
+                        title={title}
+                        status={status}
+                        setSelectValue={setSelectValue}
+                        setTextValue={setTextValue}
+                        setChecked={setChecked}
+                        inputType={inputType}
+                        idx={idx}
+                      />
+                    ),
+                  )}
               </div>
             </InProgressBoxTarget>
           </div>
@@ -122,18 +118,24 @@ const Tasks = () => {
               <div className='flex flex-col gap-4 p-4'>
                 {taskList
                   .filter((task) => task.status === 'DONE')
-                  .map(({ title, status, id, setValue, setChecked, inputType }, idx) => (
-                    <TaskCard
-                      id={id}
-                      key={idx}
-                      title={title}
-                      status={status}
-                      setValue={setValue}
-                      setChecked={setChecked}
-                      inputType={inputType}
-                      idx={idx}
-                    />
-                  ))}
+                  .map(
+                    (
+                      { title, status, id, setSelectValue, setTextValue, setChecked, inputType },
+                      idx,
+                    ) => (
+                      <TaskCard
+                        id={id}
+                        key={idx}
+                        title={title}
+                        status={status}
+                        setTextValue={setTextValue}
+                        setSelectValue={setSelectValue}
+                        setChecked={setChecked}
+                        inputType={inputType}
+                        idx={idx}
+                      />
+                    ),
+                  )}
               </div>
             </DoneBoxTarget>
           </div>
