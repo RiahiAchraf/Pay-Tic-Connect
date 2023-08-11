@@ -1,3 +1,9 @@
+import Tasks from '@/components/Tasks';
+
 export default function Home() {
-  return <div>Lorem ipsum dolor set amet,</div>;
+  return (
+    <div>
+      <Tasks />
+    </div>
+  );
 }

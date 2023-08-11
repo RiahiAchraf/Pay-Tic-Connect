@@ -5,6 +5,8 @@ import { Ubuntu } from 'next/font/google';
 
 import Layout from '@/layout';
 
+import Providers from './providers';
+
 export const metadata: Metadata = {
   title: 'Pay tic connect',
   description: 'Created by pay tic connect',
@@ -25,7 +27,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en' className={`${ubuntu.className} font-sans`}>
       <body>
-        <Layout>{children}</Layout>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );
