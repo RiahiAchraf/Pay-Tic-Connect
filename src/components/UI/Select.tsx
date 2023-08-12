@@ -9,13 +9,13 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 export const Select = ({ options, label, className, ...props }: SelectProps) => {
   return (
     <div>
-      <label className='block text-sm font-medium leading-6 text-gray-900'>{label}</label>
+      <label className='block text-sm font-medium leading-6 '>{label}</label>
       <div>
         <select
           className={cn(
             className,
             'cursor-pointer mt-2 border w-full shadow-sm rounded-lg px-5 py-[0.781rem]   focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:bg-gray-100',
-            ' border-zinc-400 ',
+            ' border-zinc-400 dark:border-indigo-900  dark:bg-gray-g1/50 ',
           )}
           {...props}
         >

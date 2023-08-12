@@ -2,7 +2,7 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 
-import { Button, Table } from '@/components/kit';
+import { Button, Table } from '@/components/UI';
 
 import DoneBoxTarget from './DoneBoxTarget';
 import InProgressBoxTarget from './InProgressBoxTarget';
@@ -26,6 +26,7 @@ const Tasks = () => {
     {
       id: 1,
       status: 'InProgress',
+      priority: 'Low',
       title: titleValue,
       assign: assignValue,
       setAssign: setAssignValue,
@@ -34,6 +35,7 @@ const Tasks = () => {
     {
       id: 2,
       status: 'InProgress',
+      priority: 'Medium',
       title: titleValueTwo,
       assign: assignValueTwo,
       setAssign: setAssignValueTwo,
@@ -42,6 +44,7 @@ const Tasks = () => {
     {
       id: 3,
       status: 'InProgress',
+      priority: 'high',
       title: titleValueThree,
       assign: assignValueThree,
       setAssign: setAssignValueThree,
@@ -96,14 +99,14 @@ const Tasks = () => {
     <CardContext.Provider value={{ isDone, isInProgress }}>
       <div className='flex flex-col gap-8'>
         <div className='flex w-full flex-col gap-8 md:flex-row'>
-          <div className='w-full rounded-xl border p-2 shadow-sm'>
-            <h1 className='flex justify-center border-b border-gray-100 py-2 font-semibold capitalize text-gray-700'>
+          <div className='w-full rounded-xl border border-dashed border-gray-g4 p-2 shadow-sm dark:border-gray-g3'>
+            <h1 className='flex justify-center border-b border-gray-100 py-2  font-semibold capitalize dark:border-gray-g9/20'>
               In progress
             </h1>
 
             <InProgressBoxTarget>
               {/* Add Task Card Component Here  */}
-              <div className='flex flex-col gap-4 p-4'>
+              <div className='flex flex-col gap-4 p-0 sm:p-4'>
                 {taskList
                   .filter((task) => task.status === 'InProgress')
                   .map(({ title, status, id, setAssign, setTitle }, idx) => (
@@ -121,11 +124,10 @@ const Tasks = () => {
             </InProgressBoxTarget>
           </div>
 
-          <div className='w-full rounded-xl border p-2 shadow-sm'>
-            <h1 className='flex justify-center border-b border-gray-100 py-2 font-semibold text-gray-700'>
+          <div className='w-full rounded-xl border border-dashed border-gray-g4 p-2 shadow-sm dark:border-gray-g3'>
+            <h1 className='flex justify-center border-b py-2 font-semibold dark:border-gray-g9/20'>
               Done
             </h1>
-
             <DoneBoxTarget>
               {/* Add Task Card Component Here  */}
               <div className='flex flex-col gap-4 p-4'>
@@ -151,7 +153,7 @@ const Tasks = () => {
           Save changes
         </Button>
 
-        <div className='mt-8 rounded-xl border py-8 shadow-sm'>
+        <div className='mt-8 rounded-xl border  border-gray-g9 py-8 shadow-sm dark:border-gray-g3'>
           <Table doneTask={doneTask} />
         </div>
       </div>

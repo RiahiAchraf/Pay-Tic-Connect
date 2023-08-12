@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "src/components/TableContent.jsx",
     "src/components/Tasks.jsx",
-    "src/components/kit/Table.jsx"
+    "src/components/UI/Table.jsx"
   ],
   "exclude": ["node_modules"]
 }

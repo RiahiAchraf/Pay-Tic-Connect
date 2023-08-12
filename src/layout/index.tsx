@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import Header from './Header';
+
 type LayoutProps = {
   children: ReactNode;
 };
@@ -7,7 +9,8 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <main className='mx-auto max-w-6xl px-5 py-12 sm:p-12'>{children}</main>
+      <Header />
+      <main className='mx-auto max-w-6xl px-12 pb-12 pt-0 '>{children}</main>
     </>
   );
 };
