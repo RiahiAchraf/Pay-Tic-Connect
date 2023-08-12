@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 
-import { Input } from '@/components/kit';
+import { Input, Select } from '@/components/kit';
 import itemsTypes from '@/utils/itemsTypes';
 
 interface TaskCardProps {
@@ -33,35 +33,31 @@ const TaskCard: React.FC<TaskCardProps> = ({ id, status, setAssign, setTitle }) 
     setTitle(event.target.value);
   };
 
-  console.log('S', status);
-
   return (
     <div
       className=' flex cursor-pointer flex-col gap-2 rounded-lg border !bg-white p-5 shadow-sm hover:bg-gray-100/50'
       ref={drag}
     >
-      <span className='font-bold'>{status}</span>
-      <div>
-        <Input
-          type='text'
-          label='Title'
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder='Enter a task'
-        />
-      </div>
-      <div>
-        <label className='block text-sm font-medium leading-6 text-gray-900'>Assigned</label>
-        <select
-          className='mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6'
-          value={selectedValue}
-          onChange={handleSelectChange}
-        >
-          <option value='user1'>User 1</option>
-          <option value='user2'>User 2</option>
-          <option value='user3'>User 3</option>
-        </select>
-      </div>
+      <h3 className='font-bold'>{status}</h3>
+
+      <Input
+        type='text'
+        label='Title'
+        value={inputValue}
+        onChange={handleInputChange}
+        placeholder='Enter a task'
+      />
+
+      <Select
+        label='Assigned'
+        value={selectedValue}
+        onChange={handleSelectChange}
+        options={[
+          { value: 'option1', label: 'Option 1' },
+          { value: 'option2', label: 'Option 2' },
+          { value: 'option3', label: 'Option 3' },
+        ]}
+      />
     </div>
   );
 };
