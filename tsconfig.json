@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/TableContent.jsx",
-    "src/components/Tasks.jsx"
+    "src/components/Tasks.jsx",
+    "src/components/kit/Table.jsx"
   ],
   "exclude": ["node_modules"]
 }
