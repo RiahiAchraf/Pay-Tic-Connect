@@ -4,7 +4,8 @@ import React, { createContext, useEffect, useState } from 'react';
 
 import DoneBoxTarget from './DoneBoxTarget';
 import InProgressBoxTarget from './InProgressBoxTarget';
-import TableContent from './TableContent';
+import { Table } from './kit';
+import Button from './kit/Button';
 import TaskCard from './TaskCard';
 
 export const CardContext = createContext({
@@ -138,16 +139,12 @@ const Tasks = () => {
           </div>
         </div>
 
-        <button
-          type='submit'
-          className='rounded-md bg-gray-900 py-4 capitalize text-white shadow-md hover:bg-gray-700'
-          onClick={handleAddTask}
-        >
+        <Button type='submit' onClick={handleAddTask}>
           Save changes
-        </button>
+        </Button>
 
-        <div className='mt-8 h-[40vh] rounded-md border py-8 shadow-md'>
-          <TableContent doneTask={doneTask} />
+        <div className='mt-8 rounded-xl border py-8 shadow-sm'>
+          <Table doneTask={doneTask} />
         </div>
       </div>
     </CardContext.Provider>
