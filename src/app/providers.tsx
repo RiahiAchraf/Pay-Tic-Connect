@@ -1,5 +1,4 @@
 'use client';
-import { ChakraProvider } from '@chakra-ui/react';
 import { ThemeProvider } from 'next-themes';
 import { ReactNode } from 'react';
 import { DndProvider } from 'react-dnd';
@@ -11,9 +10,7 @@ type AllProvidersProps = {
 
 const Providers = ({ children }: AllProvidersProps) => (
   <ThemeProvider attribute='class' disableTransitionOnChange>
-    <ChakraProvider>
-      <DndProvider backend={HTML5Backend}>{children}</DndProvider>
-    </ChakraProvider>
+    <DndProvider backend={HTML5Backend}>{children}</DndProvider>
   </ThemeProvider>
 );
 
