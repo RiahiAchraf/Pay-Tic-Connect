@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 
-import itemsTypes from '../utils/itemsTypes';
+import { Input } from '@/components/kit';
+import itemsTypes from '@/utils/itemsTypes';
 
 interface TaskCardProps {
-  content: React.ReactNode;
-  status: string;
-  title: string;
   id: number;
-  setSelectValue: (value: string) => void;
-  setChecked: (value: boolean) => void;
-  item: React.Dispatch<React.SetStateAction<string>>;
-  idx: number;
+  status: string;
+  setAssign: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ status, title, id, content, item }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ id, status, setAssign, setTitle }) => {
   const [{}, drag] = useDrag({
     type: itemsTypes.CARD,
     item: { type: itemsTypes.CARD, ID: id },
@@ -24,11 +21,19 @@ const TaskCard: React.FC<TaskCardProps> = ({ status, title, id, content, item })
   });
 
   const [selectedValue, setSelectedValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const handleSelectChange = (event: any) => {
     setSelectedValue(event.target.value);
-    item(event.target.value);
+    setAssign(event.target.value);
   };
+
+  const handleInputChange = (event: any) => {
+    setInputValue(event.target.value);
+    setTitle(event.target.value);
+  };
+
+  console.log('S', status);
 
   return (
     <div
@@ -36,8 +41,15 @@ const TaskCard: React.FC<TaskCardProps> = ({ status, title, id, content, item })
       ref={drag}
     >
       <span className='font-bold'>{status}</span>
-      <h1>{title}</h1>
-      {content}
+      <div>
+        <Input
+          type='text'
+          label='Title'
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder='Enter a task'
+        />
+      </div>
       <div>
         <label className='block text-sm font-medium leading-6 text-gray-900'>Assigned</label>
         <select
@@ -45,9 +57,6 @@ const TaskCard: React.FC<TaskCardProps> = ({ status, title, id, content, item })
           value={selectedValue}
           onChange={handleSelectChange}
         >
-          <option value='' disabled>
-            Select an option
-          </option>
           <option value='user1'>User 1</option>
           <option value='user2'>User 2</option>
           <option value='user3'>User 3</option>

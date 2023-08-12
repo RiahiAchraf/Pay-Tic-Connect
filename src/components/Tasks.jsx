@@ -2,10 +2,10 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 
+import { Button, Table } from '@/components/kit';
+
 import DoneBoxTarget from './DoneBoxTarget';
 import InProgressBoxTarget from './InProgressBoxTarget';
-import { Table } from './kit';
-import Button from './kit/Button';
 import TaskCard from './TaskCard';
 
 export const CardContext = createContext({
@@ -14,31 +14,38 @@ export const CardContext = createContext({
 });
 
 const Tasks = () => {
-  const [selectValue, setSelectValue] = useState('');
-  const [selectValueTwo, setSelectValueTwo] = useState('');
-  const [selectValueThree, setSelectValueThree] = useState('');
+  const [assignValue, setAssignValue] = useState('');
+  const [assignValueTwo, setAssignValueTwo] = useState('');
+  const [assignValueThree, setAssignValueThree] = useState('');
+
+  const [titleValue, setTitleValue] = useState('');
+  const [titleValueTwo, setTitleValueTwo] = useState('');
+  const [titleValueThree, setTitleValueThree] = useState('');
 
   const items = [
     {
       id: 1,
       status: 'InProgress',
-      title: 'Feature 1',
-      value: selectValue,
-      item: setSelectValue,
+      title: titleValue,
+      assign: assignValue,
+      setAssign: setAssignValue,
+      setTitle: setTitleValue,
     },
     {
       id: 2,
       status: 'InProgress',
-      title: 'Feature 2',
-      value: selectValueTwo,
-      item: setSelectValueTwo,
+      title: titleValueTwo,
+      assign: assignValueTwo,
+      setAssign: setAssignValueTwo,
+      setTitle: setTitleValueTwo,
     },
     {
       id: 3,
       status: 'InProgress',
-      title: 'Feature 3',
-      value: selectValueThree,
-      item: setSelectValueThree,
+      title: titleValueThree,
+      assign: assignValueThree,
+      setAssign: setAssignValueThree,
+      setTitle: setTitleValueThree,
     },
   ];
 
@@ -50,10 +57,11 @@ const Tasks = () => {
     setTasksList((prevTaskList) =>
       prevTaskList.map((item) => ({
         ...item,
-        value: item.id === 1 ? selectValue : item.id === 2 ? selectValueTwo : selectValueThree,
+        assign: item.id === 1 ? assignValue : item.id === 2 ? assignValueTwo : assignValueThree,
+        title: item.id === 1 ? titleValue : item.id === 2 ? titleValueTwo : titleValueThree,
       })),
     );
-  }, [selectValue, selectValueTwo, selectValueThree]);
+  }, [assignValue, assignValueTwo, assignValueThree, titleValue, titleValueTwo, titleValueThree]);
 
   const isDone = (id) => {
     const draggedTask = taskList.filter((task) => task.id === id)[0];
@@ -98,14 +106,14 @@ const Tasks = () => {
               <div className='flex flex-col gap-4 p-4'>
                 {taskList
                   .filter((task) => task.status === 'InProgress')
-                  .map(({ title, status, id, content, item }, idx) => (
+                  .map(({ title, status, id, setAssign, setTitle }, idx) => (
                     <TaskCard
                       id={id}
                       key={idx}
                       title={title}
                       status={status}
-                      content={content}
-                      item={item}
+                      setAssign={setAssign}
+                      setTitle={setTitle}
                       idx={idx}
                     />
                   ))}
@@ -123,14 +131,14 @@ const Tasks = () => {
               <div className='flex flex-col gap-4 p-4'>
                 {taskList
                   .filter((task) => task.status === 'DONE')
-                  .map(({ title, status, id, content, item }, idx) => (
+                  .map(({ title, status, id, setAssign, setTitle }, idx) => (
                     <TaskCard
                       id={id}
                       key={idx}
                       title={title}
                       status={status}
-                      content={content}
-                      item={item}
+                      setAssign={setAssign}
+                      setTitle={setTitle}
                       idx={idx}
                     />
                   ))}
