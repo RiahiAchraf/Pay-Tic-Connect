@@ -31,7 +31,8 @@
     ".next/types/**/*.ts",
     "src/components/TableContent.jsx",
     "src/components/Tasks.jsx",
-    "src/components/UI/Table.jsx"
+    "src/components/UI/Table.tsx",
+    "src/components/InProgressBoxTarget.jsx"
   ],
   "exclude": ["node_modules"]
 }

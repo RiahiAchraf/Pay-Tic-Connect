@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.0",
     "@tailwindcss/forms": "^0.5.4",
     "@types/node": "20.4.9",
     "@types/react": "18.2.20",

@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
 
@@ -15,9 +14,9 @@ const DoneBoxTarget = ({ children }) => {
   });
 
   return (
-    <Box ref={drop} minH='600px' w='100%' p={4} rounded='md'>
+    <div ref={drop} className='min-h-[600px] w-full p-4'>
       {children}
-    </Box>
+    </div>
   );
 };
 

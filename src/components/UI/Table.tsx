@@ -1,6 +1,17 @@
 import React, { useId } from 'react';
 
-export default function Table({ doneTask }) {
+interface Task {
+  id: number;
+  title: string;
+  assign: string;
+  priority: string;
+}
+
+interface TableProps {
+  doneTask: Task[];
+}
+
+export default function Table({ doneTask }: TableProps) {
   const ID = useId();
   const columnNames = ['ID', 'Title', 'Assigne', 'Priority'];
 

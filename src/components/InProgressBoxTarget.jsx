@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/react';
 import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
 
-import itemsTypes from '../utils/itemsTypes';
+import itemsTypes from '@/utils/itemsTypes';
+
 import { CardContext } from './Tasks';
 
 const InProgressBoxTarget = ({ children }) => {
@@ -11,19 +11,13 @@ const InProgressBoxTarget = ({ children }) => {
   const [{}, drop] = useDrop({
     accept: itemsTypes.CARD,
 
-    // drop: (item, monitor) => isDone(item.ID),
-
-    canDrop: (item) => {
-      if (isInProgress(item.ID)) {
-        isInProgress(item.ID);
-      }
-    },
+    drop: (item) => isInProgress(item.ID),
   });
 
   return (
-    <Box ref={drop} minH='600px' w='100%' p={4} rounded='md'>
+    <div ref={drop} className='min-h-[600px] w-full p-4'>
       {children}
-    </Box>
+    </div>
   );
 };
 
