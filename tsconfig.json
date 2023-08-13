@@ -34,5 +34,11 @@
     "src/components/UI/Table.tsx",
     "src/components/InProgressBoxTarget.jsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "Node"
+    }
+  }
 }
