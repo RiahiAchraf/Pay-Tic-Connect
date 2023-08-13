@@ -35,12 +35,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ id, status, setAssign, setTitle }) 
 
   return (
     <div
+      data-test='task-card'
       className=' flex cursor-pointer flex-col gap-2 rounded-lg border bg-gradient-to-r from-white/20 p-5 shadow-sm dark:border-0 dark:from-indigo-900/30 dark:shadow-xl'
       ref={drag}
     >
       <h3 className='font-bold '>{status}</h3>
 
       <Input
+        data-test='title'
         type='text'
         label='Title'
         value={inputValue}
@@ -49,6 +51,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ id, status, setAssign, setTitle }) 
       />
 
       <Select
+        data-test='assigned'
         label='Assigned'
         value={selectedValue}
         onChange={handleSelectChange}

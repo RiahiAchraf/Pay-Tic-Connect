@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.4",
@@ -16,6 +18,7 @@
     "@types/react-table": "^7.7.14",
     "autoprefixer": "10.4.14",
     "clsx": "^2.0.0",
+    "cypress-plugin-steps": "^1.1.1",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "eslint-plugin-simple-import-sort": "^10.0.0",

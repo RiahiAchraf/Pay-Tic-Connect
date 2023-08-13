@@ -32,7 +32,8 @@
     "src/components/TableContent.jsx",
     "src/components/Tasks.jsx",
     "src/components/UI/Table.tsx",
-    "src/components/InProgressBoxTarget.jsx"
+    "src/components/InProgressBoxTarget.jsx",
+    "cypress/support/commands.ts"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

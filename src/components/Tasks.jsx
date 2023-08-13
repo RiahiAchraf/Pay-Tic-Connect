@@ -106,7 +106,7 @@ const Tasks = () => {
 
             <InProgressBoxTarget>
               {/* Add Task Card Component Here  */}
-              <div className='flex flex-col gap-4 p-0 sm:p-4'>
+              <div data-test='inprogress-list-items' className='flex flex-col gap-4 p-0 sm:p-4'>
                 {taskList
                   .filter((task) => task.status === 'InProgress')
                   .map(({ title, status, id, setAssign, setTitle }, idx) => (
