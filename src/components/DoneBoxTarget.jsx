@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
 
-import itemsTypes from '../utils/itemsTypes';
+import itemsTypes from '@/utils/itemsTypes';
+
 import { CardContext } from './Tasks';
 
 const DoneBoxTarget = ({ children }) => {

@@ -1,9 +1,9 @@
-import clsx from 'clsx';
+import { cn } from '@/utils/cn';
 
 const CircleFillLeft = ({ className }: { className: string }) => {
   return (
     <svg
-      className={clsx(className, 'fill-current')}
+      className={cn(className, 'fill-current')}
       height={24}
       width={24}
       xmlns='http://www.w3.org/2000/svg'
